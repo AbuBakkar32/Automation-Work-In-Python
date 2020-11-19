@@ -1,0 +1,111 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+import time
+import openpyxl 
+from xlwt import Workbook
+import random
+import re
+
+driver = webdriver.Chrome(executable_path='C:\\Users\\Moyez\\AppData\\Local\\Programs\\Python\\Python37-32\\chromedriver_win32\\chromedriver.exe')
+
+
+
+#Rakib link
+for row in range(1, 2):
+    try:
+        driver.get('https://docs.google.com/forms/d/e/1FAIpQLSc2xd8KIsJMPrbK2BadJ5SP9T7pmhocme_nScBTgXdfHjkirA/viewform')
+        age = random.choice(['20', '18', '19', '21', '24', '22', '22', '23', '24', '24', '22', '22', '23', '22', '23','25','22', '23', '26'])
+        driver.find_element_by_xpath('/html/body/div/div[2]/form/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input').send_keys(age)
+
+        driver.find_element_by_xpath('/html/body/div/div[2]/form/div[2]/div/div[2]/div[3]/div/div/div[2]/div[1]/div[1]/label/div/div[1]/div[2]').click()
+
+        gender = random.randrange(1,3)
+        gender_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[4]/div/div/div[2]/div/div/span/div/div[' + str(gender) + ']/label/div/div[1]/div/div[3]/div'
+        driver.find_element_by_xpath(gender_xpath).click()  
+
+        student = random.randrange(1,3)
+        if int(age) >= 25 and int(age) <= 26:
+            student = 2
+        student_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div/span/div/div[' + str(student) + ']/label/div/div[1]/div/div[3]/div'
+        driver.find_element_by_xpath(student_xpath).click() 
+
+        if int(age) >= 22 and int(age) <= 24:
+            education = random.randrange(3,4)
+            education_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div[1]/div[' + str(education) + ']/label/div/div[1]/div[2]'
+            driver.find_element_by_xpath(education_xpath).click()
+        elif int(age) >= 25 and int(age) <= 26:
+            education = random.randrange(2,4)
+            education_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div[1]/div[' + str(education) + ']/label/div/div[1]/div[2]'
+            driver.find_element_by_xpath(education_xpath).click()
+        elif int(age) >= 18 and int(age) <= 19:
+            education = random.randrange(4,5)
+            education_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div[1]/div[' + str(education) + ']/label/div/div[1]/div[2]'
+            driver.find_element_by_xpath(education_xpath).click()
+        elif int(age) >= 20 and int(age) <= 21:
+            education = random.randrange(3,5)
+            education_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div[1]/div[' + str(education) + ']/label/div/div[1]/div[2]'
+            driver.find_element_by_xpath(education_xpath).click()
+
+        if student == 2:
+            employed = 1
+            employed_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[7]/div/div/div[2]/div/div/span/div/div[' + str(employed) + ']/label/div/div[1]/div/div[3]/div'
+            driver.find_element_by_xpath(employed_xpath).click()
+        else:
+            employed = 2
+            employed_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[7]/div/div/div[2]/div/div/span/div/div[' + str(employed) + ']/label/div/div[1]/div/div[3]/div'
+            driver.find_element_by_xpath(employed_xpath).click()
+
+        religion = random.choice(['1', '1', '1', '1', '2', '1', '1', '1', '1', '1', '1', '1', '1', '1'])
+        religion_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[8]/div/div/div[2]/div/div/span/div/div[' + str(religion) + ']/label/div/div[1]/div/div[3]/div'
+        driver.find_element_by_xpath(religion_xpath).click()  
+
+        ethnic_group = random.choice(['2', '2', '2', '1', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2'])
+        ethnic_group_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[9]/div/div/div[2]/div/div/span/div/div[' + str(ethnic_group) + ']/label/div/div[1]/div/div[3]/div'
+        driver.find_element_by_xpath(ethnic_group_xpath).click()  
+
+        time.sleep(1)
+        driver.find_element_by_xpath('/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[1]/div/span/span').click()
+        time.sleep(1)
+
+
+        cyberbullying = random.choice(['1', '2', '3', '1', '3', '4', '1', '3', '4', '1'])
+        cyberbullying_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[2]/div/div/div[2]/div[1]/div[' + str(cyberbullying) + ']/label/div/div[1]/div[2]'
+        driver.find_element_by_xpath(cyberbullying_xpath).click()  
+
+        social_media_platforms = random.choice(['1', '2', '1', '1', '1'])
+        social_media_platforms_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div/span/div/div[' + str(social_media_platforms) + ']/label/div/div[1]/div/div[3]/div'
+        driver.find_element_by_xpath(social_media_platforms_xpath).click()  
+
+        medium_experience = random.choice(['1', '3', '2', '1', '1', '1', '3', '4', '1', '3', '1', '3', '5', '6', '1', '3'])
+        medium_experience_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[4]/div/div/div[2]/div[1]/div[' + str(medium_experience) + ']/label/div/div[1]/div[2]'
+        driver.find_element_by_xpath(medium_experience_xpath).click()  
+
+        why_people_do = random.choice(['1', '3', '2', '2', '3', '2', '3', '4', '3', '2', '3', '4', '3', '5', '4', '1', '3', '2'])
+        why_people_do_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div[1]/div[' + str(why_people_do) + ']/label/div/div[1]/div[2]'
+        driver.find_element_by_xpath(why_people_do_xpath).click()  
+
+        religion_can_step = random.choice(['1', '1', '1', '1', '1', '1', '2', '1', '1', '1', '1', '1'])
+        religion_can_step_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div/span/div/div[' + str(religion_can_step) + ']/label/div/div[1]/div/div[3]/div'
+        driver.find_element_by_xpath(religion_can_step_xpath).click()  
+
+        cyberbullying_can_stopped = random.choice(['1', '4', '6', '2', '1', '4', '1', '4', '5', '1', '1', '4', '1', '6', '4', '1', '3', '5', '6', '1', '6', '4', '6'])
+        cyberbullying_can_stopped_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[7]/div/div/div[2]/div[1]/div[' + str(cyberbullying_can_stopped) + ']/label/div/div[1]/div[2]'
+        driver.find_element_by_xpath(cyberbullying_can_stopped_xpath).click()  
+
+        only_girls_harrased = random.choice(['1', '2', '1', '1', '1'])
+        only_girls_harrased_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[8]/div/div/div[2]/div/div/span/div/div[' + str(only_girls_harrased) + ']/label/div/div[1]/div/div[3]/div'
+        driver.find_element_by_xpath(only_girls_harrased_xpath).click()  
+
+        reason_of_cyberbullying = random.choice(['1', '7', '2', '2', '5', '1', '7', '1', '7', '5', '1', '1', '7', '1', '2', '7', '1', '3', '5', '2', '1', '6', '7', '2', '4', '2'])
+        reason_of_cyberbullying_xpath = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[9]/div/div/div[2]/div[1]/div[' + str(reason_of_cyberbullying) + ']/label/div/div[1]/div[2]'
+        driver.find_element_by_xpath(reason_of_cyberbullying_xpath).click()  
+
+        time.sleep(1)
+        #driver.find_element_by_xpath('/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[1]/div[2]/span/span').click()  
+        #time.sleep(random.randrange(60,300))
+    except:
+        continue
+
+
+
